@@ -1,13 +1,10 @@
 // PostgreSQL connection pool. Every query in the app goes through here.
 const { Pool } = require("pg");
 require("dotenv").config();
+const { databaseConfig } = require("./databaseConfig");
 
 const pool = new Pool({
-  host: process.env.PGHOST || "localhost",
-  port: Number(process.env.PGPORT) || 5432,
-  user: process.env.PGUSER || "postgres",
-  password: process.env.PGPASSWORD,
-  database: process.env.PGDATABASE || "mealme",
+  ...databaseConfig(),
   max: 10,
 });
 
